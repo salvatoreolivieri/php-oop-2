@@ -11,14 +11,18 @@ $osso = new Products('osso', 'game', 4);
 $cuccia = new Products('cuccia', 'commodity', 15);
 
 
-$giacomodo = new User('Giacomo', 'Leopardi', 28, 0);
+$giacomodo = new User('Giacomo', 'Leopardi', 28, 0, "mastercard", "2020-06-19", '');
+$giacomodo->checkExpirationDate();
 var_dump($giacomodo);
 
 
-$Napoleone = new UserRegistered('Napoleone','Bonaparte', 31, 0);
-$Napoleone->setDiscount(true);
 
-var_dump($Napoleone)
+$Napoleone = new UserRegistered('Napoleone','Bonaparte', 31, 0,"visa", "2023-06-21", '');
+$Napoleone->setDiscount(true);
+$Napoleone->checkExpirationDate();
+
+var_dump($Napoleone);
+
 
 
 ?>
