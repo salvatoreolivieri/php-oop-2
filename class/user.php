@@ -1,26 +1,29 @@
 <?php
 
+require_once __DIR__ . "/product.php";
+require_once __DIR__ . "/userRegistered.php";
+
 class User{
 
   public $name;
   public $surname;
   public $age;
 
+  public $cart;
+  public $discount = 0;
+
   public $debitCard;
   public $debitCardExpiringDate;
   public $esitoTransazione;
 
-  public function __construct($_name, $_surname, $_age, $_discount = 0, $_debitCard, $_debitCardExpiringDate, $_esitoTransazione)
+  public function __construct($_name, $_surname, $_age, $_debitCard, $_debitCardExpiringDate)
   {
     $this->name = $_name;
     $this->surname = $_surname;
     $this->age = $_age;
 
-    $this->discount = $_discount;
-
     $this->debitCard = $_debitCard;
     $this->debitCardExpiringDate = $_debitCardExpiringDate;
-    $this->esitoTransazione = $_esitoTransazione;
   }
 
   public function checkExpirationDate(){
@@ -31,20 +34,16 @@ class User{
     }
   }
 
-}
+  public function priceToPay(){
 
-class UserRegistered extends User{
-  public $registered;
-  public $discount;
+    $somma = 0;
 
-  function setRegistered($_registered){
-    $this->registered = $_registered;
-  }
-
-  function setDiscount(){
-    if ($this->registered = true) {
-      $this->discount = 20;
+    foreach ($this->cart as $prodotto ) {
+      $somma += $prodotto->price;
     }
+
+    return $this->cart = $somma * (1- ($this->discount / 100));
+
   }
 
 }
